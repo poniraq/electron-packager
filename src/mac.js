@@ -255,12 +255,13 @@ class MacApp extends App {
 
   async moveHelper (helperDirectory, suffix) {
     const originalBasename = `Electron${suffix}`
+    const name = this.opts.helperNameOverride || this.appName;
 
     if (await fs.pathExists(path.join(helperDirectory, `${originalBasename}.app`))) {
       return this.renameHelperAndExecutable(
         helperDirectory,
         originalBasename,
-        `${common.sanitizeAppName(this.appName)}${suffix}`
+        `${common.sanitizeAppName(name)}${suffix}`
       )
     } else {
       return Promise.resolve()
